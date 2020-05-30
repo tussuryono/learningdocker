@@ -8,7 +8,12 @@ Environment requirement :
     - OS : Ubuntu 20.04 Focal Fossa
 ## Instalasi Docker
 Dokumentasi untuk instalasi dapat diperoleh di https://docs.docker.com/engine/install/ubuntu/
-
+### Simple way
+Metode ini dikenal sebagai install using the convenience script
+```script
+osboxes@osboxes:~$ curl -fsSL https://get.docker.com -o get-docker.sh
+osboxes@osboxes:~$ sudo sh get-docker.sh
+```
 ## First Run
 ```script
 root@osboxes:/home/osboxes# docker container ps
