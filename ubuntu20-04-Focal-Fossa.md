@@ -6,7 +6,7 @@ Environment requirement :
     - RAM : 4 GB
     - DISK : 50 GB
     - OS : Ubuntu 20.04 Focal Fossa
-## Instalasi Docker
+## 1. Instalasi Docker
 Dokumentasi untuk instalasi dapat diperoleh di https://docs.docker.com/engine/install/ubuntu/
 ### Simple way
 Metode ini dikenal sebagai install using the convenience script
@@ -14,7 +14,7 @@ Metode ini dikenal sebagai install using the convenience script
 osboxes@osboxes:~$ curl -fsSL https://get.docker.com -o get-docker.sh
 osboxes@osboxes:~$ sudo sh get-docker.sh
 ```
-## First Run
+## 2. First Run
 ```script
 root@osboxes:/home/osboxes# docker container ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
@@ -77,7 +77,7 @@ root@osboxes:/home/osboxes#
 
 ```
 
-## Docker Pull
+## 3. Docker Pull
 ```script
 root@osboxes:/home/osboxes# docker pull ubuntu:16.04
 16.04: Pulling from library/ubuntu
@@ -96,7 +96,7 @@ ubuntu              latest              1d622ef86b13        5 weeks ago         
 root@osboxes:/home/osboxes#
 
 ```
-## Docker Run
+## 4. Docker Run
 ### Membuat container aktif selama 5 menit
 ```script
 root@osboxes:/home/osboxes# docker images
@@ -117,8 +117,21 @@ root@osboxes:~# docker container stop strange_chaplygin
 strange_chaplygin
 root@osboxes:~#
 ```
+## 5. Docker Stop
+### Menghentikan (stop) docker yang aktive
+Seperti di contoh sebelumnya, perintah untuk stop container docker adalah sebagai berikut:
+```script
+root@osboxes:~# docker container ps
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
+cd2796d6ba12        ubuntu:16.04        "sleep 300"         About a minute ago   Up About a minute                       strange_chaplygin
+
+root@osboxes:~# docker container stop strange_chaplygin
+strange_chaplygin
+root@osboxes:~#
+```
 
 ### Menghapus container yang sudah exited
+Semua container yang sudah dalam kondisi exited dapat di remove dari docker list dengan command sebagai berikut:
 ```script
 root@osboxes:/home/osboxes# docker container ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
@@ -134,13 +147,34 @@ root@osboxes:/home/osboxes# docker container ps -a
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 root@osboxes:/home/osboxes#
 ```
+```script
+root@osboxes:/home/osboxes# docker container run ubuntu cat /etc/hosts
+127.0.0.1       localhost
+::1     localhost ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+172.17.0.2      a9a34ec509fc
 
-## Docker Images
-## Docker Compose
-## Docker Engine and Storage
-## Docker Networking
-## Docker Registry
-## Lab Node JS
-## Lab Python
-## Lab Java
-## Summary
+root@osboxes:/home/osboxes# docker container run ubuntu cat /etc/netplan/00-installer-config.yaml
+cat: /etc/netplan/00-installer-config.yaml: No such file or directory
+
+root@osboxes:/home/osboxes# docker container ps -a -s
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES                   SIZE
+0004e58f77fd        ubuntu              "cat /etc/netplan/00…"   46 seconds ago      Exited (1) 44 seconds ago                       pedantic_joliot         0B (virtual 73.9MB)
+a9a34ec509fc        ubuntu              "cat /etc/hosts"         2 minutes ago       Exited (0) 2 minutes ago                        frosty_einstein         0B (virtual 73.9MB)
+8487c62eee52        ubuntu              "cat /etc/lsb-releas…"   4 minutes ago       Exited (0) 4 minutes ago                        wizardly_visvesvaraya   0B (virtual 73.9MB)
+root@osboxes:/home/osboxes#
+
+```
+Setelah melakukan penghapusan container yang tidak aktif maka free space akan tersedia kembali, karena setiap perintah docker run akan berdampak penggunaan space storage.
+## 6. Docker Images
+## 6. Docker Compose
+## 7. Docker Engine and Storage
+## 8. Docker Networking
+## 9. Docker Registry
+## 10. Lab Node JS
+## 11. Lab Python
+## 12. Lab Java
+## 13. Summary
