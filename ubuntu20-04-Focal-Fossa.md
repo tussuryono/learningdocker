@@ -41,8 +41,43 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 
 root@osboxes:/home/osboxes#
 ```
+## Docker Pull
+```script
+root@osboxes:/home/osboxes# docker pull ubuntu:16.04
+16.04: Pulling from library/ubuntu
+e92ed755c008: Pull complete
+b9fd7cb1ff8f: Pull complete
+ee690f2d57a1: Pull complete
+53e3366ec435: Pull complete
+Digest: sha256:db6697a61d5679b7ca69dbde3dad6be0d17064d5b6b0e9f7be8d456ebb337209
+Status: Downloaded newer image for ubuntu:16.04
+docker.io/library/ubuntu:16.04
 
+root@osboxes:/home/osboxes# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu              16.04               005d2078bdfa        5 weeks ago         125MB
+ubuntu              latest              1d622ef86b13        5 weeks ago         73.9MB
+root@osboxes:/home/osboxes#
+
+```
 ## Docker Run
+Menghapus container yang sudah exited
+```script
+root@osboxes:/home/osboxes# docker container ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+root@osboxes:/home/osboxes# docker container ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES
+5abd135b2c0d        ubuntu              "cat /etc/lsb-releas…"   13 minutes ago      Exited (0) 13 minutes ago                       zealous_feynman
+
+root@osboxes:/home/osboxes# docker container rm zealous_feynman
+zealous_feynman
+
+root@osboxes:/home/osboxes# docker container ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+root@osboxes:/home/osboxes#
+```
+
 ## Docker Images
 ## Docker Compose
 ## Docker Engine and Storage
