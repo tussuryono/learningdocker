@@ -19,6 +19,18 @@ osboxes@osboxes:~$ sudo sh get-docker.sh
 root@osboxes:/home/osboxes# docker container ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 
+root@osboxes:/home/osboxes# docker container run ubuntu sleep 10
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+d51af753c3d3: Pull complete
+fc878cd0a91c: Pull complete
+6154df8ff988: Pull complete
+fee5db0ff82f: Pull complete
+Digest: sha256:747d2dbbaaee995098c9792d99bd333c6783ce56150d1b11e333bbceed5c54d7
+Status: Downloaded newer image for ubuntu:latest
+
+root@osboxes:/home/osboxes#
+
 root@osboxes:/home/osboxes# docker container run ubuntu cat /etc/*release*
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=20.04
@@ -46,6 +58,25 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 
 root@osboxes:/home/osboxes#
 ```
+Menampilkan list container
+```script
+root@osboxes:/home/osboxes# docker run -d ubuntu sleep 60
+c3ffc4493de512db116b59e0f9fe0f52f418c380771fafbe4a2974c568e4e05e
+
+root@osboxes:/home/osboxes# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+c3ffc4493de5        ubuntu              "sleep 60"          9 seconds ago       Up 6 seconds                            clever_goldberg
+
+root@osboxes:/home/osboxes# docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS                           PORTS               NAMES
+c3ffc4493de5        ubuntu              "sleep 60"          20 seconds ago       Up 18 seconds                                        clever_goldberg
+529e5910b15b        ubuntu              "sleep 60"          About a minute ago   Exited (0) 35 seconds ago                            intelligent_khorana
+3e706ab05f6c        ubuntu              "sleep 10"          49 minutes ago       Exited (0) 48 minutes ago                            elastic_hoover
+cd2796d6ba12        ubuntu:16.04        "sleep 300"         About an hour ago    Exited (137) About an hour ago                       strange_chaplygin
+root@osboxes:/home/osboxes#
+
+```
+
 ## Docker Pull
 ```script
 root@osboxes:/home/osboxes# docker pull ubuntu:16.04
