@@ -169,9 +169,76 @@ root@osboxes:/home/osboxes#
 
 ```
 Setelah melakukan penghapusan container yang tidak aktif maka free space akan tersedia kembali, karena setiap perintah docker run akan berdampak penggunaan space storage.
+
+Metode menghapus container dengan menggunakan keyword container id
+```script
+root@osboxes:/home/osboxes# docker container ps -a -s
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES                   SIZE
+d03c5ca1a1a5        ubuntu              "cat /etc/hosts"         6 minutes ago       Exited (0) 6 minutes ago                        sweet_wescoff           0B (virtual 73.9MB)
+0004e58f77fd        ubuntu              "cat /etc/netplan/00…"   10 minutes ago      Exited (1) 10 minutes ago                       pedantic_joliot         0B (virtual 73.9MB)
+a9a34ec509fc        ubuntu              "cat /etc/hosts"         12 minutes ago      Exited (0) 12 minutes ago                       frosty_einstein         0B (virtual 73.9MB)
+8487c62eee52        ubuntu              "cat /etc/lsb-releas…"   14 minutes ago      Exited (0) 14 minutes ago                       wizardly_visvesvaraya   0B (virtual 73.9MB)
+root@osboxes:/home/osboxes# docker container rm d03c 0004 a9a34 8487c
+d03c
+0004
+a9a34
+8487c
+root@osboxes:/home/osboxes# docker container ps -a -s
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES               SIZE
+root@osboxes:/home/osboxes#
+```
 ## 6. Docker Images
-## 6. Docker Compose
-## 7. Docker Engine and Storage
+Mendownload image dari docker hub
+```script
+root@osboxes:/home/osboxes# docker pull ubuntu:16.04
+16.04: Pulling from library/ubuntu
+e92ed755c008: Pull complete
+b9fd7cb1ff8f: Pull complete
+ee690f2d57a1: Pull complete
+53e3366ec435: Pull complete
+Digest: sha256:db6697a61d5679b7ca69dbde3dad6be0d17064d5b6b0e9f7be8d456ebb337209
+Status: Downloaded newer image for ubuntu:16.04
+docker.io/library/ubuntu:16.04
+
+root@osboxes:/home/osboxes# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu              16.04               005d2078bdfa        5 weeks ago         125MB
+ubuntu              latest              1d622ef86b13        5 weeks ago         73.9MB
+root@osboxes:/home/osboxes#
+```
+Menghapus image docker
+```script
+root@osboxes:/home/osboxes# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu              16.04               005d2078bdfa        5 weeks ago         125MB
+ubuntu              latest              1d622ef86b13        5 weeks ago         73.9MB
+root@osboxes:/home/osboxes# docker rmi ubuntu
+Untagged: ubuntu:latest
+Untagged: ubuntu@sha256:747d2dbbaaee995098c9792d99bd333c6783ce56150d1b11e333bbceed5c54d7
+Deleted: sha256:1d622ef86b138c7e96d4f797bf5e4baca3249f030c575b9337638594f2b63f01
+Deleted: sha256:279e836b58d9996b5715e82a97b024563f2b175e86a53176846684f0717661c3
+Deleted: sha256:39865913f677c50ea236b68d81560d8fefe491661ce6e668fd331b4b680b1d47
+Deleted: sha256:cac81188485e011e56459f1d9fc9936625a1b62cacdb4fcd3526e5f32e280387
+Deleted: sha256:7789f1a3d4e9258fbe5469a8d657deb6aba168d86967063e9b80ac3e1154333f
+
+root@osboxes:/home/osboxes# docker rmi ubuntu
+Error: No such image: ubuntu
+
+root@osboxes:/home/osboxes# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu              16.04               005d2078bdfa        5 weeks ago         125MB
+root@osboxes:/home/osboxes# docker rmi ubuntu:16.04
+Untagged: ubuntu:16.04
+Untagged: ubuntu@sha256:db6697a61d5679b7ca69dbde3dad6be0d17064d5b6b0e9f7be8d456ebb337209
+Deleted: sha256:005d2078bdfab5066ae941cea93f644f5fd25521849c870f4e1496f4526d1d5b
+Deleted: sha256:a83c92a7c7a0f4a52fc74fa38496be9a5e6b738bc5fd5d60e54768fed238c173
+Deleted: sha256:c6a36d55655e576fc8166a32fd05e281d03bedc26b1118902e92e7ba421dfa72
+Deleted: sha256:d1c997f15060e07ff557383387d6839e0377873837025fc843fa5d94bea2c4e5
+Deleted: sha256:b592b5433bbffb04389a0e6349cdba6af8d006779bbb93beb69aa77d59133be4
+root@osboxes:/home/osboxes#
+```
+## 7. Docker Compose
+## 8. Docker Engine and Storage
 ## 8. Docker Networking
 ## 9. Docker Registry
 ## 10. Lab Node JS
