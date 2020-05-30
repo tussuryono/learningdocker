@@ -61,7 +61,28 @@ root@osboxes:/home/osboxes#
 
 ```
 ## Docker Run
-Menghapus container yang sudah exited
+### Membuat container aktif selama 5 menit
+```script
+root@osboxes:/home/osboxes# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu              16.04               005d2078bdfa        5 weeks ago         125MB
+ubuntu              latest              1d622ef86b13        5 weeks ago         73.9MB
+
+root@osboxes:/home/osboxes# docker run ubuntu:16.04 sleep 300
+```
+Pada posisi tersebut container akan aktif selama 5 menit dan kita tidak bisa exit dari kondisi tersebut sampai container secara otomatis exited (off).
+Proses exited dapat dilakukan secara manual dengan re-login ssh dan menjalankan perintah berikut
+```script
+root@osboxes:~# docker container ps
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
+cd2796d6ba12        ubuntu:16.04        "sleep 300"         About a minute ago   Up About a minute                       strange_chaplygin
+
+root@osboxes:~# docker container stop strange_chaplygin
+strange_chaplygin
+root@osboxes:~#
+```
+
+### Menghapus container yang sudah exited
 ```script
 root@osboxes:/home/osboxes# docker container ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
