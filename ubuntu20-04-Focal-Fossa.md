@@ -622,18 +622,94 @@ root@osboxes:~# curl http://172.17.0.3:8080
 
   <h1>Hello from 22766de4fa20!</h1>
 
-
-
-
 </div>root@osboxes:~#
+```
+running mysql database on docker
+```script
+root@osboxes:/home/osboxes# docker container run -d -e MYSQL_ROOT_PASSWORD=db_pass123 --name mysql-db mysql
+Unable to find image 'mysql:latest' locally
+latest: Pulling from library/mysql
+afb6ec6fdc1c: Pull complete
+0bdc5971ba40: Pull complete
+97ae94a2c729: Pull complete
+f777521d340e: Pull complete
+1393ff7fc871: Pull complete
+a499b89994d9: Pull complete
+7ebe8eefbafe: Pull complete
+597069368ef1: Pull complete
+ce39a5501878: Pull complete
+7d545bca14bf: Pull complete
+211e5bb2ae7b: Pull complete
+5914e537c077: Pull complete
+Digest: sha256:a31a277d8d39450220c722c1302a345c84206e7fd4cdb619e7face046e89031d
+Status: Downloaded newer image for mysql:latest
+3d3e3524869715685dddc1147d58bed766705556fa53074ebafd4d58e757bac1
+root@osboxes:/home/osboxes#
 
+root@osboxes:~# docker container ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS                 NAMES
+3d3e35248697        mysql               "docker-entrypoint.s…"   About a minute ago   Up About a minute   3306/tcp, 33060/tcp   mysql-db
+root@osboxes:~#
 
+root@osboxes:~# docker exec mysql-db cat /etc/*release*
+PRETTY_NAME="Debian GNU/Linux 10 (buster)"
+NAME="Debian GNU/Linux"
+VERSION_ID="10"
+VERSION="10 (buster)"
+VERSION_CODENAME=buster
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+cat: /etc/lsb-release: No such file or directory
+
+root@osboxes:~# docker exec -it mysql-db /bin/bash
+
+root@3d3e35248697:/# mysql -u root -p
+Enter password:
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+root@3d3e35248697:/# mysql -u root -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.20 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.02 sec)
+
+mysql>
+
+```
+
+Membuat image
+```script
+$ docker build -t webapp-color
+$ docker run -p 8282:8080 webapp-color
+
+to check operating running on docker image use this command
+$ docker run python:3.6 cat /etc/*release*
 ```
 ## 8. Docker Compose
 ## 9. Docker Engine and Storage
-## 8. Docker Networking
-## 9. Docker Registry
-## 10. Lab Node JS
-## 11. Lab Python
-## 12. Lab Java
-## 13. Summary
+## 10. Docker Networking
+## 11. Docker Registry
+## 12. Lab Node JS
+## 13. Lab Python
+## 14. Lab Java
+## 15. Summary
