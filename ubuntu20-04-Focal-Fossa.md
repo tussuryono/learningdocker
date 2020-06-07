@@ -706,6 +706,14 @@ to check operating running on docker image use this command
 $ docker run python:3.6 cat /etc/*release*
 ```
 ## 8. Docker Compose
+First create a postgress database container called db, image postgres, environmental variable POSTGRES_PASSWORD=mysecretpassword
+
+docker run --name db -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+
+Next let's create a simple wordpress container called wordpress, image: wordpress, link it to the container db and expose it on host port 8085
+
+docker run -d --name=wordpress --link db:db -p 8085:80 wordpress
+
 ## 9. Docker Engine and Storage
 ## 10. Docker Networking
 ## 11. Docker Registry
